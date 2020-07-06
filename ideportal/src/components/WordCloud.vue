@@ -9,6 +9,7 @@
 </template>
 
 <script>
+//ordsky tid. :|
 export default {
   name: "WordCloud",
   data (){
