@@ -12,9 +12,12 @@
     margin-left:42%;
     padding: 20px;
   "
+  font-family="Impact"
   :words="categories"
-  :color="([, weight]) => weight > 8 ? 'DeepPink' : weight > 4 ? 'RoyalBlue' : 'Indigo'"
-  font-family="Roboto"
+  :color="([, weight]) => weight > 8 ? 'DeepPink' 
+                        : weight > 4 ? 'RoyalBlue' 
+                        : weight > 2 ? 'Indigo': 'Green'"
+ 
 >
 <div slot-scope="{text, weight}">
      <div :title="weight" class="word" @click="selectItem(text)">
@@ -41,11 +44,12 @@ export default {
       return {
         // categories:["JS","C#","Vue<3","SQL","React","HTML/CSS"],
           categories:[
-              ["JS",5],
+              ["JS",9],
               ["C#", 9],
-              ["HTML/CSS", 5],
+              ["HTML/CSS", 4],
               ["Vue", 6],
-              ["SQL", 4]
+              ["SQL", 3],
+              ["React", 2]
               ],
           randomNr: Math.floor(Math.random() * 11)
           
