@@ -1,38 +1,27 @@
 <template>
-    <div>
-        <!-- <ul v-for="(category, index) in categories" :key=index>
-            <li @click="selectItem(category)">{{category}}</li>
-
-        </ul> -->
-      
-<vue-word-cloud
-  style="
+  <div>
+    <vue-word-cloud
+      style="
     height: 180px;
     width: 240px;
     margin-left:42%;
     padding: 20px;
   "
-  font-family="Impact"
-  :words="categories"
-  :color="([, weight]) => weight > 8 ? 'DeepPink' 
-                        : weight > 4 ? 'RoyalBlue' 
-                        : weight > 2 ? 'Indigo': 'Green'"
- 
->
-<div slot-scope="{text, weight}">
-     <div :title="weight" class="word" @click="selectItem(text)">
-      {{ text }}
-    </div>
-</div>
-</vue-word-cloud>
-
-    </div>
+      font-family="Impact"
+      :words="categories"
+      :color="([, weight]) => weight >= 3 ? 'DeepPink' 
+                            : weight >= 2 ? 'RoyalBlue' 
+                            : weight > 0 ? 'Indigo': 'Green'"
+    >
+      <div slot-scope="{text, weight}">
+        <div :title="weight" class="word" @click="selectItem(text)">{{ text }}</div>
+      </div>
+    </vue-word-cloud>
+  </div>
 </template>
 
 <script>
-//ordsky tid. :|
-import VueWordCloud from 'vuewordcloud';
-
+import VueWordCloud from "vuewordcloud";
 
 //ta vare på antall prosjekter i hver category - flere prosj, større tekst
 export default {
@@ -40,43 +29,35 @@ export default {
   components: {
     [VueWordCloud.name]: VueWordCloud
   },
-  data (){
-      return {
-        // categories:["JS","C#","Vue<3","SQL","React","HTML/CSS"],
-          categories:[
-              ["JS",9],
-              ["C#", 9],
-              ["HTML/CSS", 4],
-              ["Vue", 6],
-              ["SQL", 3],
-              ["React", 2]
-              ],
-          randomNr: Math.floor(Math.random() * 11)
-          
-  }
+   props: {
+    categories: Array
+  },
+    
+ 
+  data() {
+    return {
+     
+    };
   },
   methods: {
-      selectItem(clickedCat){
-          console.log(clickedCat, " select kjører")
-          this.$emit('cloudToHome', clickedCat)
-      }
-  },
- 
-  
+    selectItem(clickedCat) {
+      this.$emit("cloudToHome", clickedCat);
+    }
+  }
 };
 </script>
 
 
 <style scoped>
-.cloud{
+/* .cloud{
 
-}
+} */
 
-.word{
-cursor: pointer; 
+.word {
+  cursor: pointer;
 }
-.word:hover{
-    /* border: 3px dotted #3a7999; */
-	color: orange;
- }
+.word:hover {
+  /* border: 3px dotted #3a7999; */
+  color: orange;
+}
 </style>

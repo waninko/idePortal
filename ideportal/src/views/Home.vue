@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <WordCloud v-on:cloudToHome="setSelected"/>
-    <ProjectList :selectedCategory=selectedCatFromCloud />
+    <WordCloud v-on:cloudToHome="setSelected" :categories=currentProjectCounts />
+    <ProjectList v-on:listToHome="setProjectCountForCloud" :selectedCategory=selectedCatFromCloud />
   </div>
 </template>
 
@@ -11,7 +11,6 @@ import WordCloud from "@/components/WordCloud.vue"
 import ProjectList from "@/components/ProjectList.vue"
 
 
-//catche selectedItem fra WordCloud - sende til ProjectList
 export default {
   name: "Home",
   components: {
@@ -20,12 +19,17 @@ export default {
   },
   data() {
     return {
-      selectedCatFromCloud: ''
+      selectedCatFromCloud: '',
+      currentProjectCounts: []
     }
   },
   methods: {
     setSelected(value){
       this.selectedCatFromCloud = value
+    },
+    setProjectCountForCloud(value){
+      this.currentProjectCounts = value
+
     }
   },
 };
