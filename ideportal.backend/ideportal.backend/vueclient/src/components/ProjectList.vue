@@ -96,6 +96,7 @@ name: "ProjectList",
             axios.get('https://localhost:44307/api/project')
               .then(function (response) {
                   console.log(response);
+                  this.apiTest.push(response);
               })
               .catch(function (error) {
                   console.log(error);
