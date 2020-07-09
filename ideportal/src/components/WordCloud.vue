@@ -32,13 +32,6 @@ export default {
    props: {
     categories: Array
   },
-    
- 
-  data() {
-    return {
-     
-    };
-  },
   methods: {
     selectItem(clickedCat) {
       this.$emit("cloudToHome", clickedCat);

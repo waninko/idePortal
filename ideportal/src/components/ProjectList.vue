@@ -13,8 +13,6 @@
 
 <script>
 //litet preview bilde av proj. ved siden av linken?
-//tell antall prosjekter i hver kategori
-//send tallet til wordcloud, og bruk som value
 export default {
 name: "ProjectList",
  props: {
@@ -22,6 +20,7 @@ name: "ProjectList",
   },
   data() {
       return {
+          //her axios'er vi inn DB
          allProjects: [
              {name: "C# Project 2",
               cat: "C#",
@@ -65,7 +64,9 @@ name: "ProjectList",
         ["HTML/CSS", 0],
         ["Vue",0],
         ["SQL", 0],
-        ["React", 0]] ,   
+        ["React", 0]] , 
+        
+        catsFromDB:[]
       }
   },
 created() {
@@ -73,6 +74,10 @@ created() {
      this.$emit("listToHome", this.categoriesAndCounters);
 },
   methods: {
+      //om ingen projects i cat - "no projects in this category" / ikke push cat name
+      //...dette skal kanskje i backend ja.
+     
+      //prosjekter skal kunne ha flere cat's - index of? elns
     categoryCounters(){
         for(let singleProject of this.allProjects){
             for(let category of this.categoriesAndCounters){
