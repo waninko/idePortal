@@ -12,6 +12,12 @@ namespace ideportal.backend.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
+        private readonly ProjectDbContext _context;
+        
+        public ProjectController(ProjectDbContext context)
+        {
+            _context = context;
+        }
 
         Project[] _data = new[]
             {
@@ -34,12 +40,21 @@ namespace ideportal.backend.Controllers
 
         }
 
-        
+
         [HttpGet]
-        public async Task<IEnumerable<Project>> GetMany()
+        //public async Task<IEnumerable<Project>> GetMany()
+        //{
+        //    //return await Task.Run(() => _data);
+        //   //return await _context.Projects.ToList<>;
+
+        //}
+        public ActionResult<IEnumerable<Project>> GetVask()
         {
-            return await Task.Run(() => _data);
+
+            return _context.Projects.ToList();
+
         }
+
 
 
         [HttpPost]

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ideportal.backend.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace ideportal.backend
 {
@@ -28,17 +30,12 @@ namespace ideportal.backend
             services.AddControllers();
             services.AddSwaggerDocument();
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("VueCorsPolicy", builder =>
-            //    {
-            //        builder
-            //          .AllowAnyHeader()
-            //          .AllowAnyMethod()
-            //          .AllowCredentials()
-            //          .WithOrigins("http://localhost:8080");
-            //    });
-            //});
+            var connectionString = Configuration.GetConnectionString("DBconnection");
+            services.AddDbContext<ProjectDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

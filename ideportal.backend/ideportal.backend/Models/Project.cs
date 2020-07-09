@@ -7,7 +7,7 @@ namespace ideportal.backend.Models
 {
     public class Project
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string ProjectName { get; set; }
         public string ProjectLink { get; set; }
         public string ProjectCategory { get; set; }
