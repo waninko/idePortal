@@ -32,3 +32,5 @@ D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\obj\Debug\netcorea
 D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\obj\Debug\netcoreapp3.1\ideportal.backend.MvcApplicationPartsAssemblyInfo.cs
 D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\obj\Debug\netcoreapp3.1\ideportal.backend.MvcApplicationPartsAssemblyInfo.cache
 D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\obj\Debug\netcoreapp3.1\ideportal.backend.csproj.CopyComplete
+D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\bin\Debug\netcoreapp3.1\vueclient\package-lock.json
+D:\gitREPOS\GET\idePortal\ideportal.backend\ideportal.backend\bin\Debug\netcoreapp3.1\vueclient\package.json

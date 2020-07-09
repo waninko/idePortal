@@ -12,6 +12,9 @@
 </template>
 
 <script>
+   // import api from '@/ProjectApiService'
+    import axios from 'axios'
+
 //litet preview bilde av proj. ved siden av linken?
 export default {
 name: "ProjectList",
@@ -66,10 +69,12 @@ name: "ProjectList",
         ["SQL", 0],
         ["React", 0]] , 
         
-        catsFromDB:[]
+          catsFromDB: [],
+        apiTest:[]
       }
   },
-created() {
+        created() {
+    this.getAll()
     this.categoryCounters()
      this.$emit("listToHome", this.categoriesAndCounters);
 },
@@ -86,7 +91,22 @@ created() {
                 }
             } 
         }
-    }
+      },
+        getAll() {
+            axios.get('https://localhost:44307/api/project')
+              .then(function (response) {
+                  console.log(response);
+              })
+              .catch(function (error) {
+                  console.log(error);
+              });
+          //try {
+          //    this.apiTest = await api.getAll()
+          //}
+          //catch (error) {
+          //    console.log(error);
+          //}
+      }
 }
 }
 </script>

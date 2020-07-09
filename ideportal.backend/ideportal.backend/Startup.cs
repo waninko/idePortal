@@ -27,6 +27,18 @@ namespace ideportal.backend
         {
             services.AddControllers();
             services.AddSwaggerDocument();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("VueCorsPolicy", builder =>
+            //    {
+            //        builder
+            //          .AllowAnyHeader()
+            //          .AllowAnyMethod()
+            //          .AllowCredentials()
+            //          .WithOrigins("http://localhost:8080");
+            //    });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +54,7 @@ namespace ideportal.backend
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
@@ -51,6 +64,14 @@ namespace ideportal.backend
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseStaticFiles();
+
+            //app.UseCors("VueCorsPolicy");
+            //{
+            //    options.WithOrigins("http://localhost:8080"));
+            //builder.AllowAnyOrigin();
+            //builder.AllowAnyMethod();
+            //builder.AllowAnyHeader();
+            //});
         }
     }
 }
