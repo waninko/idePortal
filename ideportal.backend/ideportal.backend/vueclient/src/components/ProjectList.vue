@@ -3,9 +3,9 @@
     <div class="selectedCat">SELECTED CATEGORY: {{selectedCategory}}</div>
 
     <h3>Projects in this category:</h3>
-    <div v-for="(project, index) in allProjects" :key="index">
-      <div v-if="selectedCategory==project.cat">
-        <a :href="project.link">{{project.name}}</a>
+    <div v-for="(project, index) in projectsFromDB" :key="index">
+      <div v-if="selectedCategory==project.projectCategory">
+        <a :href="project.projectLink">{{project.projectName}}</a>
       </div>
     </div>
   </div>
@@ -38,11 +38,11 @@ name: "ProjectList",
               link: "http://www.op.no"
              },
              {name: "Hello World of Javascript!",
-              cat: "JS",
+              cat: "JavaScript",
               link: "http://www.neopets.com"
              },
               {name: "Hello, plz work!",
-              cat: "JS",
+                  cat: "JavaScript",
               link: "http://www.javascript.com"
              },
              {name: "Hey, vue-huu you :)",
@@ -62,51 +62,55 @@ name: "ProjectList",
               link: "https://vg.no/"
              },
          ],
-        categoriesAndCounters: [["JS", 0],
+        categoriesAndCounters: [["JavaScript", 0],
         ["C#",0],
         ["HTML/CSS", 0],
         ["Vue",0],
         ["SQL", 0],
         ["React", 0]] , 
         
-          catsFromDB: [],
-        apiTest:[]
+        projectsFromDB: [],
+       
       }
   },
-        created() {
-    this.getAll()
-    this.categoryCounters()
-     this.$emit("listToHome", this.categoriesAndCounters);
-},
+  mounted() {
+     this.getAll()
+   //console.log("catNcounts før emit: " + this.categoriesAndCounters)
+   //  this.$emit("listToHome", this.categoriesAndCounters);
+        },
+      
+        
   methods: {
       //om ingen projects i cat - "no projects in this category" / ikke push cat name
       //...dette skal kanskje i backend ja.
      
       //prosjekter skal kunne ha flere cat's - index of? elns
-    categoryCounters(){
-        for(let singleProject of this.allProjects){
+      categoryCounters() {
+          for (let singleProject of this.projectsFromDB) {
             for(let category of this.categoriesAndCounters){
-                if(singleProject.cat == category[0]) {
+                if(singleProject.projectCategory == category[0]) {
                     category[1]++
                 }
             } 
-        }
+          }
+          console.log("catNcounts før emit: " + this.categoriesAndCounters)
+          this.$emit("listToHome", this.categoriesAndCounters);
+          
       },
-        getAll() {
+
+      getAll() {
+          var vueInstance = this;
             axios.get('https://localhost:44307/api/project')
               .then(function (response) {
-                  console.log(response);
-                  this.apiTest.push(response);
+                  vueInstance.projectsFromDB=response.data;
+                  vueInstance.categoryCounters()
               })
               .catch(function (error) {
                   console.log(error);
               });
-          //try {
-          //    this.apiTest = await api.getAll()
-          //}
-          //catch (error) {
-          //    console.log(error);
-          //}
+
+          
+        
       }
 }
 }
