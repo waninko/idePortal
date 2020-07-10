@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       projectsFromDB: [],
-      catsFromDB: []
+      existingCatsInDB: []
     };
   },
   mounted() {
@@ -32,26 +32,26 @@ export default {
   },
 
   methods: {
-    //prosjekter skal kunne ha flere cat's - index of? elns
+    //prosjekter skal kunne ha flere cat's - index of? elns - finn en DB løsning på multicats. 2 felt? cat1+cat2?
     categoryCounters() {
       for (let i = 0; i < this.projectsFromDB.length; i++) {
         let tempArr = [this.projectsFromDB[i].projectCategory, 0];
-        let doesCatExist = this.catsFromDB.find(el =>
-          el.find(p => p == this.projectsFromDB[i].projectCategory)
+        let doesCatAlreadyExist = this.existingCatsInDB.find(el =>
+          el.find(pCat => pCat == this.projectsFromDB[i].projectCategory)
         );
-        if (!doesCatExist) {
-          this.catsFromDB.push(tempArr);
+        if (!doesCatAlreadyExist) {
+          this.existingCatsInDB.push(tempArr);
         }
       }
 
       for (let singleProject of this.projectsFromDB) {
-        for (let category of this.catsFromDB) {
+        for (let category of this.existingCatsInDB) {
           if (singleProject.projectCategory == category[0]) {
             category[1]++;
           }
         }
       }
-      this.$emit("listToHome", this.catsFromDB);
+      this.$emit("listToHome", this.existingCatsInDB);
     },
 
     getAll() {
