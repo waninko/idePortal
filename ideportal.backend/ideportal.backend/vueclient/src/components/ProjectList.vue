@@ -12,108 +12,62 @@
 </template>
 
 <script>
-   // import api from '@/ProjectApiService'
-    import axios from 'axios'
+// import api from '@/ProjectApiService'
+import axios from "axios";
 
 //litet preview bilde av proj. ved siden av linken?
 export default {
-name: "ProjectList",
- props: {
+  name: "ProjectList",
+  props: {
     selectedCategory: String
   },
   data() {
-      return {
-          //her axios'er vi inn fra APIet - behandler data i front? eller sorterer ferdig i back?
-         allProjects: [
-             {name: "C# Project 2",
-              cat: "C#",
-              link: "http://www.vg.no"
-             },
-             {name: "FlappyTerje",
-              cat: "C#",
-              link: "http://www.op.no"
-             },
-              {name: "FlappyTerje 3",
-              cat: "C#",
-              link: "http://www.op.no"
-             },
-             {name: "Hello World of Javascript!",
-              cat: "JavaScript",
-              link: "http://www.neopets.com"
-             },
-              {name: "Hello, plz work!",
-                  cat: "JavaScript",
-              link: "http://www.javascript.com"
-             },
-             {name: "Hey, vue-huu you :)",
-              cat: "Vue",
-              link: "https://vuejs.org/"
-             },
-             {name: "Hello Vue!",
-              cat: "Vue",
-              link: "https://vuejs.org/"
-             },
-             {name: "My VUE-BOT!",
-              cat: "Vue",
-              link: "https://vuejs.org/"
-             },
-             {name: "Test DB",
-              cat: "SQL",
-              link: "https://vg.no/"
-             },
-         ],
-        categoriesAndCounters: [["JavaScript", 0],
-        ["C#",0],
-        ["HTML/CSS", 0],
-        ["Vue",0],
-        ["SQL", 0],
-        ["React", 0]] , 
-        
-        projectsFromDB: [],
-       
-      }
+    return {
+      projectsFromDB: [],
+      catsFromDB: []
+    };
   },
   mounted() {
-     this.getAll()
-   //console.log("catNcounts før emit: " + this.categoriesAndCounters)
-   //  this.$emit("listToHome", this.categoriesAndCounters);
-        },
-      
-        
+    this.getAll();
+  },
+
   methods: {
-      //om ingen projects i cat - "no projects in this category" / ikke push cat name
-      //...dette skal kanskje i backend ja.
-     
-      //prosjekter skal kunne ha flere cat's - index of? elns
-      categoryCounters() {
-          for (let singleProject of this.projectsFromDB) {
-            for(let category of this.categoriesAndCounters){
-                if(singleProject.projectCategory == category[0]) {
-                    category[1]++
-                }
-            } 
-          }
-          console.log("catNcounts før emit: " + this.categoriesAndCounters)
-          this.$emit("listToHome", this.categoriesAndCounters);
-          
-      },
-
-      getAll() {
-          var vueInstance = this;
-            axios.get('https://localhost:44307/api/project')
-              .then(function (response) {
-                  vueInstance.projectsFromDB=response.data;
-                  vueInstance.categoryCounters()
-              })
-              .catch(function (error) {
-                  console.log(error);
-              });
-
-          
-        
+    //prosjekter skal kunne ha flere cat's - index of? elns
+    categoryCounters() {
+      for (let i = 0; i < this.projectsFromDB.length; i++) {
+        let tempArr = [this.projectsFromDB[i].projectCategory, 0];
+        let doesCatExist = this.catsFromDB.find(el =>
+          el.find(p => p == this.projectsFromDB[i].projectCategory)
+        );
+        if (!doesCatExist) {
+          this.catsFromDB.push(tempArr);
+        }
       }
-}
-}
+
+      for (let singleProject of this.projectsFromDB) {
+        for (let category of this.catsFromDB) {
+          if (singleProject.projectCategory == category[0]) {
+            category[1]++;
+          }
+        }
+      }
+      this.$emit("listToHome", this.catsFromDB);
+    },
+
+    getAll() {
+      var vueInstance = this;
+      axios
+        .get("https://localhost:44307/api/project")
+        .then(function(response) {
+          vueInstance.projectsFromDB = response.data;
+          vueInstance.categoryCounters();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }
+};
 </script>
 
 <style scoped>
