@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ideportal.backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ideportal.backend.Controllers
 {
@@ -30,7 +31,7 @@ namespace ideportal.backend.Controllers
 
         //Let's get 'em CRUDz!
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")]  //trengs dette i det hele tatt? 
         public async Task<Project> GetOne(int id)
         {
             return await Task.Run(() =>
@@ -42,12 +43,6 @@ namespace ideportal.backend.Controllers
 
 
         [HttpGet]
-        //public async Task<IEnumerable<Project>> GetMany()
-        //{
-        //    //return await Task.Run(() => _data);
-        //   //return await _context.Projects.ToList<>;
-
-        //}
         public ActionResult<IEnumerable<Project>> GetAll()
         {
 
@@ -67,16 +62,33 @@ namespace ideportal.backend.Controllers
         }
 
 
-        [HttpPut] //edit project
-        public async Task<string> Edit(Project project)
+            [HttpPut("{id}")] //edit project
+        public async Task<ActionResult<Project>> Edit(int id, [FromBody] Project project)
         {
-            return await Task.Run(() => "Funks!");
+            //return await Task.Run(() => "Funks!");
+            var projectExists = await _context.Projects.AnyAsync(p => p.Id == id);
+            if (!projectExists)
+            {
+                Console.Beep();
+                return NotFound();  //actionResult for å få brukt disse innebygde
+            }
+
+            _context.Projects.Update(project);
+            await _context.SaveChangesAsync();
+            return Ok(); //actionResult for å få brukt disse innebygde
         }
 
-        [HttpDelete] //remove project
-        public async Task<string> Delete(int id)
+
+
+        [HttpDelete("{id}")] //remove project
+        public async Task<ActionResult<Project>> Delete(long id)
         {
-            return await Task.Run(() => "Funks!");
+            var selectedProject = await _context.Projects.FindAsync(id);
+            _context.Projects.Remove(selectedProject);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+           // return await Task.Run(() => "Funks!");
         }
 
     }
