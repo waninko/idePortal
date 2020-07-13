@@ -19,7 +19,7 @@ namespace ideportal.backend.Controllers
             _context = context;
         }
 
-        Project[] _data = new[]
+        Project[] _dummyData = new[]
             {
                 new Project() { Id =1, ProjectName = "ArrayElementDummy1", ProjectLink = "http://www.vg.no", ProjectCategory = "C#" },
                 new Project() { Id = 2, ProjectName = "ArrayElementDummy2", ProjectLink = "http://www.vg.no", ProjectCategory = "JavaScript" }
@@ -34,7 +34,7 @@ namespace ideportal.backend.Controllers
         public async Task<Project> GetOne(int id)
         {
             return await Task.Run(() =>
-              _data.SingleOrDefault(p=>p.Id==id)
+              _dummyData.SingleOrDefault(p=>p.Id==id)
             );
 
 
@@ -48,7 +48,7 @@ namespace ideportal.backend.Controllers
         //   //return await _context.Projects.ToList<>;
 
         //}
-        public ActionResult<IEnumerable<Project>> GetVask()
+        public ActionResult<IEnumerable<Project>> GetAll()
         {
 
             return _context.Projects.ToList();
@@ -56,24 +56,27 @@ namespace ideportal.backend.Controllers
         }
 
 
-
-        [HttpPost]
-        public async Task<int> Create(Project project)
+        [HttpPost] //add project
+        public async Task<Project> Create(Project project)
         {
-            return await Task.Run(() => 1);
+            //return await Task.Run(() => "Funks!");
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+
+            return project;
         }
 
 
-        [HttpPut]
-        public async Task<int> Edit(Project project)
+        [HttpPut] //edit project
+        public async Task<string> Edit(Project project)
         {
-            return await Task.Run(() => 1);
+            return await Task.Run(() => "Funks!");
         }
 
-        [HttpDelete]
-        public async Task<int> Delete(int id)
+        [HttpDelete] //remove project
+        public async Task<string> Delete(int id)
         {
-            return await Task.Run(() => 1);
+            return await Task.Run(() => "Funks!");
         }
 
     }

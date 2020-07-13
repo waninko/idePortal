@@ -11,7 +11,7 @@
       :words="categories"
       :color="([, weight]) => weight >= 3 ? 'DeepPink' 
                             : weight >= 2 ? 'RoyalBlue' 
-                            : weight > 0 ? 'Indigo': 'Green'"
+                            : weight >  1 ? 'Indigo': 'Green'"
     >
       <div slot-scope="{text, weight}">
         <div :title="weight" class="word" @click="selectItem(text)">{{ text }}</div>
