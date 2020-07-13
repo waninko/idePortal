@@ -22,7 +22,7 @@ data() {
 },
 methods: {
     submitProject(){
-        //sende til sende til en admin-forslagslagring-db - vise beskjed om det blir error||200
+        //sende til sende til en admin-forslagslagring-table i db - vise beskjed om det blir error||200
        console.log(this.projectToBeSubmitted, " submitted project")
     }
 },
