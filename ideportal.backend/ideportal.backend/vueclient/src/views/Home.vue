@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Portal Logo" src="../assets/logo.png" />
     <WordCloud v-on:cloudToHome="setSelected" :categories=currentProjectCounts />
     <ProjectList v-on:listToHome="setProjectCountForCloud" :selectedCategory=selectedCatFromCloud />
   </div>

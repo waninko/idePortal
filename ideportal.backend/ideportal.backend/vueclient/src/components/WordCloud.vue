@@ -23,7 +23,7 @@
 <script>
 import VueWordCloud from "vuewordcloud";
 
-//ta vare på antall prosjekter i hver category - flere prosj, større tekst
+
 export default {
   name: "WordCloud",
   components: {

@@ -1,6 +1,8 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Home from "../views/Home.vue"
+import Admin from "../views/Admin.vue"
+import Submit from "../views/Submit.vue"
 
 Vue.use(VueRouter);
 
@@ -19,6 +21,16 @@ const routes = [
     component: function() {
       return import(/* webpackChunkName: "about" */ "../views/About.vue");
     }
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin
+  },
+  {
+    path:"/submit",
+    name: "Submit",
+    component: Submit
   }
 ];
 
