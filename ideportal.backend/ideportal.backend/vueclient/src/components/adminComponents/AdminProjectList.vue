@@ -2,7 +2,7 @@
   <div>
       <h2>All Current Projects:</h2>
       <div v-for="(project, index) in allProjects" :key="index">
-      {{project.projectName}} <button>Edit</button>  <button @click="removeProject(project)">Delete</button>    
+      {{project.projectName}} <button @click="engageEditMode(project)">Edit</button>  <button @click="removeProject(project)">Delete</button>    
       </div>
   </div>
 </template>
@@ -16,8 +16,8 @@ export default {
   name: "ProjectList",
   data() {
     return {
-      msg: "ListComponent w/options goes here",
-      allProjects: []
+      allProjects: [],
+
     };
   },
   mounted() {
@@ -44,6 +44,10 @@ export default {
             .catch(function (error){
                 console.log(error)
             })
+      },
+      engageEditMode(project){
+        console.log(project, " clicked proj.")
+         this.$emit("engage", project);
       }
   },
 };
