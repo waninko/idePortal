@@ -3,6 +3,7 @@
     <img alt="Portal Logo" src="../assets/logo.png" />
     <WordCloud v-on:cloudToHome="setSelected" :categories=currentProjectCounts />
     <ProjectList v-on:listToHome="setProjectCountForCloud" :selectedCategory=selectedCatFromCloud />
+     <router-link to="/submit">Submit a new Project</router-link>
   </div>
 </template>
 

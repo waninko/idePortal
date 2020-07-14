@@ -1,5 +1,6 @@
 <template>
   <div >
+    <router-link to="/">Back Home</router-link>
     <h1>This is the Submit Project page (the view)</h1>
     <SubmitP />
   </div>
