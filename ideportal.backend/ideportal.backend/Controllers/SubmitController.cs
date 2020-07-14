@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ideportal.backend.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace ideportal.backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[EnableCors("AllowOrigin")]
     public class SubmitController : ControllerBase
     {
         private readonly SubmitDbContext _context;
@@ -20,14 +22,22 @@ namespace ideportal.backend.Controllers
             _context = context;
         }
 
+        //Add Submission
+        [HttpPost] 
+        public async Task<Submit> Create(Submit submission)
+        {
+            _context.SubmittedProjects.Add(submission);
+            await _context.SaveChangesAsync();
+            //Response.Headers[""] = submission;
+            return submission;
+        }
+
 
         //Get All
         [HttpGet]
         public ActionResult<IEnumerable<Submit>> GetAll()
         {
-
             return _context.SubmittedProjects.ToList();
-
         }
 
         //Delete Specific
@@ -39,7 +49,6 @@ namespace ideportal.backend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
-           
         }
 
 

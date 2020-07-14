@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ideportal.backend.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace ideportal.backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[EnableCors("AllowOrigin")]
     public class ProjectController : ControllerBase
     {
         private readonly ProjectDbContext _context;
@@ -27,27 +29,20 @@ namespace ideportal.backend.Controllers
             };
 
 
-
-
         //Let's get 'em CRUDz!
-
         [HttpGet("{id}")]  //trengs dette i det hele tatt? 
         public async Task<Project> GetOne(int id)
         {
             return await Task.Run(() =>
               _dummyData.SingleOrDefault(p=>p.Id==id)
             );
-
-
         }
 
 
         [HttpGet]
         public ActionResult<IEnumerable<Project>> GetAll()
         {
-
             return _context.Projects.ToList();
-
         }
 
 
