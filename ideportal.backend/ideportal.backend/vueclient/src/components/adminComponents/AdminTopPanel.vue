@@ -2,7 +2,7 @@
   <div>
     <b-button variant="outline-warning" @click="chooseList('projectList')">Current Projects</b-button>
     <b-button variant="outline-warning" @click="chooseList('submissions')">Submissions</b-button>
-    <b-button variant="outline-warning">Add/Remove Admins</b-button>
+    <b-button variant="outline-warning">Administrate Admins</b-button>
     <b-button variant="outline-warning" @click="logout()">LOGOUT</b-button>
 
   </div>

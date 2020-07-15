@@ -1,5 +1,6 @@
 <template>
   <div>
+ 
     <div class="selectedCat">SELECTED CATEGORY: {{selectedCategory}}
 
     <h4>Projects in this category:</h4></div>

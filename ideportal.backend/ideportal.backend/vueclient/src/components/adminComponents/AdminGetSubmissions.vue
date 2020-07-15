@@ -83,7 +83,12 @@ export default {
 <style scoped>
 
 .tableDiv{
-  margin-left: 300px;
+  width: 50vw;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  text-align: center;
 }
 td{
  width: 200px;
@@ -99,5 +104,4 @@ tr:hover{
 .headers:hover{
    pointer-events: none;
 }
-
 </style>

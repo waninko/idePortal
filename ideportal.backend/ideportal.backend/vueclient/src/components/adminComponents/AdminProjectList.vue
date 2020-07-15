@@ -5,8 +5,8 @@
       <table v-for="(project, index) in allProjects" :key="index">
      <tr>
      <td> {{project.projectName}} </td>
-     <td> <b-button variant="outline-warning" @click="engageEditMode(project)">Edit</b-button> </td>
-     <td><b-button variant="outline-warning" @click="removeProject(project)">Delete</b-button></td>    
+     <td> <b-button variant="outline-warning" @click="engageEditMode(project)">Edit</b-button> 
+     <b-button variant="outline-warning" @click="removeProject(project)">Delete</b-button></td>    
      </tr>
       </table>
   </div>   
@@ -57,9 +57,20 @@ export default {
 </script>
 
 <style scoped>
-
+h2{
+  width: 50vw;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 auto;
+}
 .tableDiv{
-  margin-left: 400px;
+  width: 50vw;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  padding-left: 15vw;
 }
 td{
  width: 150px;
