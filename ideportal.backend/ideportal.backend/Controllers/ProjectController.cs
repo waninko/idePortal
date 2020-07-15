@@ -30,12 +30,13 @@ namespace ideportal.backend.Controllers
 
 
         //Let's get 'em CRUDz!
-        [HttpGet("{id}")]  //trengs dette i det hele tatt? 
-        public async Task<Project> GetOne(int id)
+        [HttpGet("{id}")]  
+        public async Task<Project> GetOne(long id)
         {
-            return await Task.Run(() =>
-              _dummyData.SingleOrDefault(p=>p.Id==id)
-            );
+            return await _context.Projects.FindAsync(id);
+            //return await Task.Run(() =>
+            //  _dummyData.SingleOrDefault(p=>p.Id==id)
+            //);
         }
 
 
@@ -57,7 +58,7 @@ namespace ideportal.backend.Controllers
         }
 
 
-            [HttpPut("{id}")] //edit project
+        [HttpPut("{id}")] //edit project
         public async Task<ActionResult<Project>> Edit(int id, [FromBody] Project project)
         {
             //return await Task.Run(() => "Funks!");

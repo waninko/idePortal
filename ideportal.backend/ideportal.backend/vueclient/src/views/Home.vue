@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <LoginPanel />
     <img alt="Portal Logo" src="../assets/logo.png" />
     <WordCloud v-on:cloudToHome="setSelected" :categories=currentProjectCounts />
     <ProjectList v-on:listToHome="setProjectCountForCloud" :selectedCategory=selectedCatFromCloud />
@@ -10,13 +11,15 @@
 <script>
 import WordCloud from "@/components/WordCloud.vue"
 import ProjectList from "@/components/ProjectList.vue"
+import LoginPanel from "@/components/LoginPanel.vue"
 
 
 export default {
   name: "Home",
   components: {
     WordCloud,
-    ProjectList
+    ProjectList,
+    LoginPanel
   },
   data() {
     return {

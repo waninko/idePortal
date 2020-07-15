@@ -8,9 +8,6 @@
 </template>
 
 <script>
-//engage editmode! emit til parent, som shower editmode om dette er tilfelle.
-//send med selected project id til det som skal endres, så riktig updates i db
-
 import axios from "axios";
 export default {
   name: "ProjectList",
