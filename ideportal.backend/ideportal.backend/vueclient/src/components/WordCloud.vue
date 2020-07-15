@@ -2,9 +2,9 @@
   <div>
     <vue-word-cloud
       style="
-    height: 180px;
-    width: 240px;
-    margin-left:42%;
+    height: 380px;
+    width: 440px;
+    margin-left:40%;
     padding: 20px;
   "
       font-family="Impact"

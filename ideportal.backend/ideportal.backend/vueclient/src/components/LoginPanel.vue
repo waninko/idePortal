@@ -1,8 +1,8 @@
 <template>
     <div>
-        <input type="text" placeholder="Username" v-model="username" /> 
-        <input type="text" placeholder="Password" v-model="password" />
-        <button @click="checkLogin()">LOGIN as ADMIN</button>
+        <b-form-input size="sm" type="password" placeholder="Username" v-model="username" /> 
+        <b-form-input size="sm" type="password" placeholder="Password" v-model="password" />
+        <b-button variant="outline-warning" @click="checkLogin()">LOGIN as ADMIN</b-button>
     </div>
 </template>
 <script>

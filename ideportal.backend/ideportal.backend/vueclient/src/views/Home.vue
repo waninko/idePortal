@@ -1,10 +1,23 @@
 <template>
   <div class="home">
-    <LoginPanel />
-    <img alt="Portal Logo" src="../assets/logo.png" />
+    <img class="logo" src="../assets/logo.png" />
+    <div>
+    <b-button v-b-toggle.collapse-1 variant="warning">Submit a Project / Log in as Admin</b-button>
+  <b-collapse id="collapse-1" class="mt-2">
+    <b-card>
+      <p class="card-text"> 
+        <b-button variant="warning" to="/submit">Submit a new Project</b-button></p>
+      <b-button variant="warning" v-b-toggle.collapse-1-inner size="sm">Are you an Admin?</b-button>
+      <b-collapse id="collapse-1-inner" class="mt-2">
+        <b-card><LoginPanel /></b-card>
+      </b-collapse>
+    </b-card>
+  </b-collapse>
+  </div>
+
     <WordCloud v-on:cloudToHome="setSelected" :categories=currentProjectCounts />
     <ProjectList v-on:listToHome="setProjectCountForCloud" :selectedCategory=selectedCatFromCloud />
-     <router-link to="/submit">Submit a new Project</router-link>
+    
   </div>
 </template>
 
@@ -38,3 +51,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .logo{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  height: 25%;
+  }
+</style>

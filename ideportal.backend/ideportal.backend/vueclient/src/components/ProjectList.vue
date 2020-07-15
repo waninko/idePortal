@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="selectedCat">SELECTED CATEGORY: {{selectedCategory}}</div>
+    <div class="selectedCat">SELECTED CATEGORY: {{selectedCategory}}
 
-    <h3>Projects in this category:</h3>
+    <h4>Projects in this category:</h4></div>
     <div v-for="(project, index) in projectsFromDB" :key="index">
       <div v-if="selectedCategory==project.projectCategory">
         <a :href="project.projectLink">{{project.projectName}}</a>
@@ -72,10 +72,10 @@ export default {
 
 <style scoped>
 .selectedCat {
-  font-size: 25px;
+  font-size: 27px;
   font-weight: bold;
   color: orange;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
 a {
   font-weight: bold;
