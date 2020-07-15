@@ -1,7 +1,6 @@
 <template>
   <div >
       <AdminTop v-on:listChoice="showSelectedList"/>
-    <h1>This is the Admin page (the view)</h1>
     <Projects v-on:engage="editMode" v-if="projectListActive" />
     <Edit v-if="editModeActive"  :selectedProject=selectedProjectId v-on:editmodeOff="editMode"/>
     <Add v-if="addModeActive" />

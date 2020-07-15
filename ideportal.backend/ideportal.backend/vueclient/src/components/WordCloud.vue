@@ -42,15 +42,10 @@ export default {
 
 
 <style scoped>
-/* .cloud{
-
-} */
-
 .word {
   cursor: pointer;
 }
 .word:hover {
-  /* border: 3px dotted #3a7999; */
   color: orange;
 }
 </style>

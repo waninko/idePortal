@@ -1,9 +1,15 @@
 <template>
   <div>
       <h2>All Current Projects:</h2>
-      <div v-for="(project, index) in allProjects" :key="index">
-      {{project.projectName}} <button @click="engageEditMode(project)">Edit</button>  <button @click="removeProject(project)">Delete</button>    
-      </div>
+  <div class="tableDiv">
+      <table v-for="(project, index) in allProjects" :key="index">
+     <tr>
+     <td> {{project.projectName}} </td>
+     <td> <b-button variant="outline-warning" @click="engageEditMode(project)">Edit</b-button> </td>
+     <td><b-button variant="outline-warning" @click="removeProject(project)">Delete</b-button></td>    
+     </tr>
+      </table>
+  </div>   
   </div>
 </template>
 
@@ -49,3 +55,18 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.tableDiv{
+  margin-left: 400px;
+}
+td{
+ width: 150px;
+ font-family:Verdana, Geneva, Tahoma, sans-serif;
+ font-weight: bold;
+}
+tr:hover{
+  background-color: rgba(240, 184, 32, 0.157);
+}
+</style>

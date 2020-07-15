@@ -1,10 +1,23 @@
 <template>
   <div>
-    <h2>HEre's the submissions!</h2>
-    <div v-for="(submission, index) in subArr" :key="index">
-      {{submission.submitName }} - {{submission.submitCategory}} - {{submission.submitLink}}
-      <button @click="approveProject(submission)">Approve</button>
-      <button @click="denyProject(submission)">Deny</button>
+    <h2>Make your Choices...</h2>
+    <div class="tableDiv">  
+    <table >
+      <tr class="headers bord p-3 mb-2 bg-warning text-dark"> 
+                           <th>Name</th> 
+                           <th>Category</th> 
+                           <th class="p-3">Link</th>
+                           <th>Approve/Deny</th>
+      </tr>
+      <tr v-for="(submission, index) in subArr" :key="index">
+          <td>{{submission.submitName }}</td>  
+          <td>{{submission.submitCategory}}</td>
+          <td>{{submission.submitLink}}</td>
+          <td><b-button variant="outline-warning" @click="approveProject(submission)">Approve</b-button>
+              <b-button variant="outline-warning" @click="denyProject(submission)">Deny</b-button>
+         </td>
+      </tr>
+    </table>
     </div>
   </div>
 </template>
@@ -66,3 +79,25 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.tableDiv{
+  margin-left: 300px;
+}
+td{
+ width: 200px;
+ font-family:Verdana, Geneva, Tahoma, sans-serif;
+ font-weight: bold;
+}
+tr:hover{
+  background-color: rgba(240, 184, 32, 0.157);
+}
+.bord{
+  border: solid black 3px;
+}
+.headers:hover{
+   pointer-events: none;
+}
+
+</style>

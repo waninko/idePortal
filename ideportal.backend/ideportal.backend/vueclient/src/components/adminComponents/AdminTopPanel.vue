@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button @click="chooseList('projectList')">Current Projects</button>
-    <button @click="chooseList('submissions')">Submissions</button>
-    <button>Add/Remove Admins</button>
-    <button @click="logout()">LOGOUT</button>
+    <b-button variant="outline-warning" @click="chooseList('projectList')">Current Projects</b-button>
+    <b-button variant="outline-warning" @click="chooseList('submissions')">Submissions</b-button>
+    <b-button variant="outline-warning">Add/Remove Admins</b-button>
+    <b-button variant="outline-warning" @click="logout()">LOGOUT</b-button>
 
   </div>
 </template>
