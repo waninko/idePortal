@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuewordcloud": "^18.7.12"

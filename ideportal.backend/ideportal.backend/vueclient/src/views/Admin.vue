@@ -5,6 +5,7 @@
     <Edit v-if="editModeActive"  :selectedProject=selectedProjectId v-on:editmodeOff="editMode"/>
     <Add v-if="addModeActive" />
     <Submissions v-if="submissionsActive" />
+    <AdminAdministration v-if="administrateAdminsActive" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Projects from "@/components/adminComponents/AdminProjectList.vue"
 import Edit from "@/components/adminComponents/AdminEditProject.vue"
 import Add from "@/components/adminComponents/AdminAddProject.vue"
 import Submissions from "@/components/adminComponents/AdminGetSubmissions.vue"
+import AdminAdministration from "@/components/adminComponents/AdminAdministration.vue"
 
 export default {
   name: "Admin",
@@ -22,7 +24,8 @@ export default {
     Projects,
     Edit,
     Add,
-    Submissions
+    Submissions,
+    AdminAdministration
   },
   data() {
       return {
@@ -30,8 +33,9 @@ export default {
           editModeActive: false,
           addModeActive: false,
           submissionsActive: false,
+          administrateAdminsActive: false,
           selectedProjectId: "",
-          active: "See Submissions"
+          
       }
   },
   methods: {
@@ -39,11 +43,19 @@ export default {
       if(value == "projectList"){
          this.projectListActive = true
          this.submissionsActive = false
+         this.administrateAdminsActive = false
          this.editModeActive = false
       }
       if(value == "submissions"){
          this.projectListActive = false
          this.submissionsActive = true
+         this.administrateAdminsActive = false
+         this.editModeActive = false
+      }
+       if(value == "administrateAdmins"){
+         this.projectListActive = false
+         this.submissionsActive = false
+         this.administrateAdminsActive = true
          this.editModeActive = false
       }
     },
