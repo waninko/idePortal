@@ -14,17 +14,21 @@
             <td></td>
           <td>{{admin.name }}</td>
           <td>
-            <b-button variant="outline-warning">Remove Admin</b-button>
+            <b-button variant="outline-warning" @click="removeAdmin(admin)">Remove Admin</b-button>
           </td>
         </tr>
       </table>
     </div>
+
     <b-modal id="modal-prevent-closing" ref="modal" title="Submit New Admin" @ok="addNewAdmin()">
-      <b-form-input type="text" placeholder="Admin Name" v-model="newAdminName.name"></b-form-input>
+      <b-form-input type="text" placeholder="Admin Name" v-model="newAdmin.Name"></b-form-input>
+      <b-form-input type="text" placeholder="Password" v-model="newAdmin.Password"></b-form-input>  
     </b-modal>
+
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: "AdminAdministration",
   data() {
@@ -34,13 +38,47 @@ export default {
         { name: "Bertrude" },
         { name: "Magna." }
       ],
-      newAdminName: { name: "" }
+      newAdmin: { 
+          Name: "",
+          Password: ""
+       }
     };
   },
+  created() {
+      this.getAdminList();
+  },
   methods: {
+    getAdminList(){
+         var vueInstance = this;
+      axios.get("https://localhost:44307/api/admin")
+        .then(function(response) {
+          vueInstance.currentAdministrators = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     addNewAdmin() {
-      console.log(this.newAdminName, " admin name når OK klikkes");
-      this.currentAdministrators.push(this.newAdminName);
+         var vueInstance = this;
+       axios.post("https://localhost:44307/api/admin", this.newAdmin)
+        .then(function(response) {
+          console.log(response);
+          vueInstance.getAdminList()
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    removeAdmin(admin){
+         var vueInstance = this;
+         axios.delete("https://localhost:44307/api/admin/"+ admin.id)
+         .then(function (response){
+                console.log(response)
+                vueInstance.getAdminList()
+            })
+            .catch(function (error){
+                console.log(error)
+            })
     }
   }
 };
@@ -48,7 +86,7 @@ export default {
 
 <style scoped>
 .tableDiv {
-  width: 50vw;
+  width: 30vw;
   position: relative;
   display: flex;
   flex-flow: column wrap;

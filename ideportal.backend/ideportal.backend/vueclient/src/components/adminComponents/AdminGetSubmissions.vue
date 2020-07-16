@@ -43,8 +43,7 @@ export default {
   methods: {
     getSubmissionsFromDB() {
       var vueInstance = this;
-      axios
-        .get("https://localhost:44307/api/submit")
+      axios.get("https://localhost:44307/api/submit")
         .then(function(response) {
           vueInstance.subArr = response.data;
         })
@@ -57,20 +56,24 @@ export default {
         this.submissionToBeSubmitted.ProjectName = submission.submitName
         this.submissionToBeSubmitted.ProjectLink = submission.submitLink
         this.submissionToBeSubmitted.ProjectCategory = submission.submitCategory
-        
+          var vueInstance = this;
          axios.post("https://localhost:44307/api/project", this.submissionToBeSubmitted)
             .then(function (response){
                 console.log(response)
+                vueInstance.denyProject(submission)
+                
             })
             .catch(function (error){
                 console.log(error)
             })
     },
     denyProject(sub){
+       var vueInstance = this;
        //får en XML(?) root error selv om det funker. sjekk ut det.
         axios.delete("https://localhost:44307/api/submit/"+ sub.id)
          .then(function (response){
                 console.log(response)
+                vueInstance.getSubmissionsFromDB()
             })
             .catch(function (error){
                 console.log(error)
