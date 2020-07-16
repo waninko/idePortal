@@ -41,6 +41,12 @@ namespace ideportal.backend
             {
                 options.UseSqlServer(connectionString);
             });
+            services.AddDbContext<AdminDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+
 
             //services.AddCors(c =>
             //{
@@ -54,7 +60,7 @@ namespace ideportal.backend
             //});
 
 
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
