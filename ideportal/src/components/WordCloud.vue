@@ -9,9 +9,12 @@
   "
       font-family="Impact"
       :words="categories"
-      :color="([, weight]) => weight >= 3 ? 'DeepPink' 
-                            : weight >= 2 ? 'RoyalBlue' 
-                            : weight > 0 ? 'Indigo': 'Green'"
+      :color="([, weight]) => weight >= 5 ? 'Purple' 
+                            : weight >= 3 ? 'DeepPink' 
+                            : weight >= 2 ? 'Orange' 
+                            : weight >= 1 ? 'RoyalBlue' 
+                            : weight  > 0 ? 'Indigo': 'Green'
+              "
     >
       <div slot-scope="{text, weight}">
         <div :title="weight" class="word" @click="selectItem(text)">{{ text }}</div>
@@ -21,6 +24,7 @@
 </template>
 
 <script>
+//note - fargekode etter navn på cat, ikke weight
 import VueWordCloud from "vuewordcloud";
 
 //ta vare på antall prosjekter i hver category - flere prosj, større tekst

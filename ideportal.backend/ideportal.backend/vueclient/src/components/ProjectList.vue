@@ -14,7 +14,7 @@
 
 <script>
 // import api from '@/ProjectApiService'
-import axios from "axios";
+//import axios from "axios";
 
 //litet preview bilde av proj. ved siden av linken?
 export default {
@@ -24,13 +24,27 @@ export default {
   },
   data() {
     return {
-      projectsFromDB: [],
-      existingCatsInDB: []
+      projectsFromDB: [{
+        projectName : "Hei",
+        projectCategory: "C#",
+        projectLink : "www.vg.no"
+      },
+      {
+        projectName : "på",
+        projectCategory: "C#",
+        projectLink : "www.vg.no"
+      },
+      {
+        projectName : "Deg",
+        projectCategory: "JavaScript",
+        projectLink : "www.vg.no"
+      }],
+      existingCatsInDB: ["C#", "JavaScript", "SQL"]
     };
   },
-  mounted() {
-    this.getAll();
-  },
+  // mounted() {
+  //   this.getAll();
+  // },
 
   methods: {
     //prosjekter skal kunne ha flere cat's - index of? elns - finn en DB løsning på multicats. 2 felt? cat1+cat2?
@@ -56,16 +70,24 @@ export default {
     },
 
     getAll() {
-      var vueInstance = this;
-      axios
-        .get("https://localhost:44307/api/project")
-        .then(function(response) {
-          vueInstance.projectsFromDB = response.data;
-          vueInstance.categoryCounters();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+
+      this.existingCatsInDB = ["C#", "JavaScript", "SQL"]
+      this.projectsFromDB = [{
+        projectName : "Hei",
+        projectCategory: "C#",
+        projectLink : "www.vg.no"
+      }]
+      this.categoryCounters();
+      //var vueInstance = this;
+      // axios
+      //   .get("https://localhost:44307/api/project")
+      //   .then(function(response) {
+      //     vueInstance.projectsFromDB = response.data;
+      //     vueInstance.categoryCounters();
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
     }
   }
 };
